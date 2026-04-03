@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MISHBA Burrito Packaging Innovation — Kiran Sreenivas</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0f; --bg2: #111118; --bg3: #16161f;
+    --border: rgba(255,255,255,0.07);
+    --accent: #ff5c35; --accent2: #ff8c6b;
+    --text: #f0f0f5;
+    --text-muted: rgba(240,240,245,0.5);
+    --text-dim: rgba(240,240,245,0.25);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; }
+  
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 18px 48px; display: flex; align-items: center; justify-content: space-between; background: rgba(10,10,15,0.92); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); }
+  .nav-logo { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.05rem; color: var(--text); text-decoration: none; }
+  .nav-logo span { color: var(--accent); }
+  .back-btn { display: inline-flex; align-items: center; gap: 8px; color: var(--text-muted); text-decoration: none; font-size: 0.85rem; font-weight: 400; letter-spacing: 0.03em; transition: color 0.2s; }
+  .back-btn:hover { color: var(--accent); }
+  .back-btn svg { width: 16px; height: 16px; }
+
+  .page-hero { padding: 120px 80px 60px; border-bottom: 1px solid var(--border); background: var(--bg2); position: relative; overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; top: 0; right: 0; width: 500px; height: 100%; background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(255,92,53,0.07) 0%, transparent 70%); pointer-events: none; }
+  .hero-category { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
+  .hero-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 4rem); letter-spacing: -0.03em; line-height: 1.05; margin-bottom: 20px; }
+  .hero-sub { font-size: 1.1rem; color: var(--text-muted); max-width: 680px; line-height: 1.75; margin-bottom: 36px; }
+  .hero-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+  .tag { padding: 5px 14px; background: rgba(255,92,53,0.08); border: 1px solid rgba(255,92,53,0.15); border-radius: 100px; font-size: 0.75rem; color: var(--accent2); font-weight: 500; }
+  .hero-meta { display: flex; gap: 40px; }
+  .meta-item { }
+  .meta-label { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 4px; }
+  .meta-value { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 0.95rem; color: var(--text); }
+
+  .content { max-width: 1100px; margin: 0 auto; padding: 80px 80px; }
+  
+  .section { margin-bottom: 72px; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 20px; display: flex; align-items: center; gap: 12px; }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .section-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 20px; }
+  .prose { color: var(--text-muted); font-size: 1rem; line-height: 1.85; }
+  .prose p { margin-bottom: 16px; }
+  .prose strong { color: var(--text); font-weight: 500; }
+
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+
+  .img-block { }
+  .img-block img { width: 100%; border-radius: 12px; border: 1px solid var(--border); object-fit: cover; }
+  .img-caption { font-size: 0.75rem; color: var(--text-dim); margin-top: 10px; text-align: center; line-height: 1.4; }
+
+  .stat-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 28px; text-align: center; transition: border-color 0.2s; }
+  .stat-card:hover { border-color: rgba(255,92,53,0.25); }
+  .stat-number { font-family: 'Syne', sans-serif; font-size: 2.4rem; font-weight: 800; color: var(--accent); line-height: 1; margin-bottom: 8px; }
+  .stat-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.4; }
+
+  .step-list { display: flex; flex-direction: column; gap: 0; }
+  .step { display: flex; gap: 24px; padding: 24px 0; border-bottom: 1px solid var(--border); }
+  .step:last-child { border-bottom: none; }
+  .step-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.8rem; color: var(--text-dim); line-height: 1; min-width: 48px; }
+  .step-content { }
+  .step-title { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: 8px; }
+  .step-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; }
+
+  .highlight-box { background: rgba(255,92,53,0.06); border: 1px solid rgba(255,92,53,0.15); border-radius: 12px; padding: 28px 32px; margin: 32px 0; }
+  .highlight-box p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; }
+  .highlight-box p strong { color: var(--text); }
+
+  .finding-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .finding { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px; }
+  .finding-icon { font-size: 1.3rem; margin-bottom: 10px; }
+  .finding-title { font-family: 'Syne', sans-serif; font-size: 0.85rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .finding-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+  .outcome-bar { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 24px; display: flex; align-items: center; gap: 24px; margin-bottom: 12px; }
+  .outcome-icon { font-size: 1.5rem; width: 40px; text-align: center; flex-shrink: 0; }
+  .outcome-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+  .outcome-text strong { color: var(--text); }
+
+  footer { padding: 32px 80px; border-top: 1px solid var(--border); background: var(--bg2); display: flex; justify-content: space-between; align-items: center; }
+  footer p { font-size: 0.8rem; color: var(--text-dim); }
+  footer span { color: var(--accent); }
+
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  @media (max-width: 900px) {
+    .page-hero, .content, footer { padding-left: 24px; padding-right: 24px; }
+    .two-col, .three-col, .finding-grid { grid-template-columns: 1fr; }
+    nav { padding: 16px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Kiran<span>.</span></a>
+  <a href="index.html" class="back-btn">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg>
+    Back to Portfolio
+  </a>
+</nav>
+
+<div class="page-hero">
+  <div class="hero-category">Product Innovation · Sustainability · Packaging Design</div>
+  <h1 class="hero-title">MISHBA Burrito Packaging Innovation</h1>
+  <p class="hero-sub">A complete product innovation project redesigning the packaging for a Berlin burrito chain — driven by personal connection, structured research, technology benchmarking, and real stakeholder testing with both staff and customers.</p>
+  <div class="hero-tags">
+    <span class="tag">Packaging Design</span>
+    <span class="tag">Sustainability</span>
+    <span class="tag">Customer Research</span>
+    <span class="tag">Prototyping</span>
+    <span class="tag">3-Phase Implementation</span>
+    <span class="tag">Technology Benchmarking</span>
+  </div>
+  <div class="hero-meta">
+    <div class="meta-item"><div class="meta-label">Year</div><div class="meta-value">2025</div></div>
+    <div class="meta-item"><div class="meta-label">Type</div><div class="meta-value">Personal / Academic Project</div></div>
+    <div class="meta-item"><div class="meta-label">Stakeholders Interviewed</div><div class="meta-value">MISHBA Staff + Customers</div></div>
+    <div class="meta-item"><div class="meta-label">Institution</div><div class="meta-value">Hochschule Fresenius, Berlin</div></div>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="section-label">Why MISHBA</div>
+    <div class="two-col">
+      <div class="prose">
+        <p>MISHBA is a fast-casual Berlin burrito chain known for its affordable prices, fresh ingredients, customisable burritos and bowls, and vegan-friendly menu. It has multiple locations across the city and serves a primarily student and young professional crowd.</p>
+        <p>This project began not from an assignment brief, but from a genuine personal experience. <strong>MISHBA became my comfort food when I first arrived in Berlin as a Master's student</strong> — a familiar, affordable, and satisfying meal in a new city. That personal connection made me pay close attention to what the brand does well, and where it falls short.</p>
+        <p>The biggest gap I noticed was packaging. The current foil and paper wrapping is messy when eaten on the go, doesn't retain heat well, offers no branding surface, and generates unnecessary waste. This project set out to fix that — with a solution that works for the customer, the staff, and the brand.</p>
+      </div>
+      <div class="img-block">
+        <img src="images/mishba-restaurant.png" alt="MISHBA restaurant interior in Berlin" >
+        <div class="img-caption">MISHBA — a fast-casual Berlin burrito chain that became the focus of this packaging innovation project</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Current Value Proposition & Gaps</div>
+    <div class="finding-grid">
+      <div class="finding">
+        <div class="finding-icon">✅</div>
+        <div class="finding-title">What MISHBA Does Well</div>
+        <div class="finding-desc">Affordable pricing, fresh ingredients, vegan options, fast service, convenient locations, highly customisable menu — strong fundamentals for its target market.</div>
+      </div>
+      <div class="finding">
+        <div class="finding-icon">❌</div>
+        <div class="finding-title">Packaging Pain Points</div>
+        <div class="finding-desc">Current foil/paper wrapping causes spillage, sogginess, and mess when eating on the go. No branding surface. Not sustainable. Competitors Dolores and Chupenga already have stronger brand identities.</div>
+      </div>
+      <div class="finding">
+        <div class="finding-icon">💡</div>
+        <div class="finding-title">Customer Feedback Themes</div>
+        <div class="finding-desc">Better packaging, improved brand awareness, more 24-hour outlet locations, and bolder flavours — packaging came up as the most actionable near-term improvement.</div>
+      </div>
+      <div class="finding">
+        <div class="finding-icon">🏆</div>
+        <div class="finding-title">Competitive Context</div>
+        <div class="finding-desc">Dolores (70% vegan, premium positioning), Chupenga (strong delivery and multi-location), Berlin Burrito Company (food truck, events) — all have stronger packaging and brand presence than MISHBA.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Technology Research</div>
+    <div class="section-title">Three Technologies That Could Transform MISHBA's Operations</div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Smart Packaging — QR Code Integration</div>
+          <div class="step-desc">QR code-enabled packaging allows customers to scan for real-time nutritional information, ingredient sourcing, allergen data, and loyalty programmes. Reduces paper label usage while increasing brand engagement and customer trust. Already adopted by major food brands as a sustainability-aligned solution.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">AI-Driven Plant-Based Innovation</div>
+          <div class="step-desc">Companies like NotCo use AI (their "Giuseppe" model) to replicate animal products at the molecular level using plant-based ingredients. For MISHBA, this opens a path to expanding its already strong vegan menu with products that match the taste and texture of meat options — a major market differentiator in Berlin's vegan-forward market.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">IoT Waste Reduction (Kitro Technology)</div>
+          <div class="step-desc">Kitro is an AI-powered IoT food waste monitoring system — a camera above the bin and a scale below capture what is thrown away in real time. This data helps restaurant operators reduce portion waste and make data-driven purchasing decisions. For a chain like MISHBA with multiple locations, this could meaningfully reduce operational costs.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">The Solution</div>
+    <div class="section-title">Hexagonal Biodegradable Packaging with Banana Peel Opening</div>
+    <div class="two-col">
+      <div class="img-block">
+        <img src="images/mishba-prototype.png" alt="Proposed hexagonal biodegradable packaging with MISHBA branding" >
+        <div class="img-caption">Prototype concept — hexagonal biodegradable kraft box with perforated edges for the "banana peel" eating mechanism</div>
+      </div>
+      <div>
+        <div class="prose" style="margin-bottom: 24px;">
+          <p>After evaluating multiple packaging formats (cylindrical tubes, standard rectangular boxes, hexagonal boxes), the hexagonal kraft box was selected using a ranking and prioritisation method based on criteria including sustainability, usability, branding potential, and manufacturing feasibility.</p>
+        </div>
+        <div class="step-list">
+          <div class="step">
+            <div class="step-num">①</div>
+            <div class="step-content">
+              <div class="step-title">Biodegradable Material</div>
+              <div class="step-desc">Made from Finland's fibre-based packaging movement — eliminates the current paper-foil approach with a fully compostable alternative.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">②</div>
+            <div class="step-content">
+              <div class="step-title">Banana Peel Opening</div>
+              <div class="step-desc">Perforations along the hexagonal edges allow the packaging to be peeled open like a banana as the burrito is eaten — eliminating the mess of foil wrapping.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">③</div>
+            <div class="step-content">
+              <div class="step-title">Insulated & Spill-Proof</div>
+              <div class="step-desc">The hexagonal shape provides structural integrity, heat retention, and moisture resistance — keeping burritos warm and intact during takeout and delivery.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">④</div>
+            <div class="step-content">
+              <div class="step-title">Branding + QR Surface</div>
+              <div class="step-desc">Flat outer surfaces provide space for MISHBA's logo, nutritional information, and QR codes — converting every order into a brand touchpoint.</div>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">⑤</div>
+            <div class="step-content">
+              <div class="step-title">Stackable & Space-Saving</div>
+              <div class="step-desc">The geometric design allows boxes to stack efficiently in the kitchen — improving storage and reducing preparation time for staff.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Stakeholder Testing</div>
+    <div class="section-title">Real Feedback from MISHBA Staff and Customers</div>
+    <div class="prose" style="margin-bottom: 28px;">
+      <p>The prototype concept (presented as an image) was tested directly with two distinct groups — MISHBA outlet workers and regular MISHBA customers — using structured interview questions. This two-group approach captured both operational and consumer perspectives.</p>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="finding">
+          <div class="finding-icon">👷</div>
+          <div class="finding-title">Feedback from MISHBA Outlet Workers</div>
+          <div class="finding-desc" style="margin-top: 8px; font-size: 0.88rem; line-height: 1.7;">
+            <strong style="color: var(--text);">Ease of packing</strong> — workers found the prototype would be simple to seal, reducing preparation time.<br><br>
+            <strong style="color: var(--text);">Storage efficiency</strong> — the stackable design was highly appreciated compared to foil rolls.<br><br>
+            <strong style="color: var(--text);">Structural stability</strong> — the hexagonal form was rated positively for both packing ease and leak-proof characteristics.
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="finding">
+          <div class="finding-icon">🙋</div>
+          <div class="finding-title">Feedback from MISHBA Customers</div>
+          <div class="finding-desc" style="margin-top: 8px; font-size: 0.88rem; line-height: 1.7;">
+            <strong style="color: var(--text);">First impression</strong> — customers perceived the new packaging as premium and higher quality than current wrapping.<br><br>
+            <strong style="color: var(--text);">Handling & eating</strong> — the structured shape was seen as significantly better for on-the-go eating without spillage.<br><br>
+            <strong style="color: var(--text);">Freshness & heat</strong> — customers agreed the design would keep burritos warmer for longer — a major benefit for delivery orders.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Implementation Plan</div>
+    <div class="section-title">Three-Phase Rollout Strategy</div>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Phase 1 — Concept Testing</div>
+          <div class="step-desc">Present the image-based prototype to MISHBA customers and outlet workers. Gather structured feedback on customer acceptance rate, operational impact, and cost-effectiveness. Define final package dimensions, material specifications, and key requirements before moving to physical prototyping.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Phase 2 — Pilot Testing</div>
+          <div class="step-desc">Produce limited physical samples and test in select MISHBA outlet locations. Collect feedback from staff and customers using the real product. Evaluate acceptance rate, worker handling time, storage efficiency, and sustainability metrics. Make any final design adjustments before scaling.</div>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Phase 3 — Full-Scale Implementation</div>
+          <div class="step-desc">Roll out finalised packaging across all MISHBA outlets. Launch marketing campaign highlighting the new sustainable packaging. Measure customer satisfaction through post-purchase surveys, operational efficiency improvements, and sustainability goals (waste reduction, supply chain efficiency).</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-label">Outcomes</div>
+    <div class="outcome-bar"><div class="outcome-icon">📦</div><div class="outcome-text"><strong>Complete end-to-end product innovation cycle</strong> — from problem identification through research, design, prototyping, testing, and a phased implementation roadmap</div></div>
+    <div class="outcome-bar"><div class="outcome-icon">♻️</div><div class="outcome-text"><strong>Sustainability-aligned solution</strong> — biodegradable materials, waste reduction technology integration, and QR-enabled transparency address growing consumer expectations</div></div>
+    <div class="outcome-bar"><div class="outcome-icon">✅</div><div class="outcome-text"><strong>Validated by real stakeholders</strong> — both MISHBA staff and customers responded positively to the prototype, confirming both operational and consumer viability</div></div>
+    <div class="outcome-bar"><div class="outcome-icon">🎯</div><div class="outcome-text"><strong>Brand differentiation strategy</strong> — the packaging doubles as a marketing tool, helping MISHBA stand out against competitors Dolores, Chupenga and Berlin Burrito Company</div></div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 <span>Kiran Sreenivas</span></p>
+  <p><a href="index.html" style="color: var(--accent); text-decoration: none;">← Back to Portfolio</a></p>
+</footer>
+</body>
+</html>
